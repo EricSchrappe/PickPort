@@ -1,0 +1,15 @@
+{% extends "items/items_base.html" %}
+	{% block main_item %}
+		<div align="center">
+			<div class="card cardShape cardSize">
+				<div class="card-body">
+					<form method="POST">
+						{% csrf_token %}
+						<p>Are you sure that you want to delete {{ object.name }} ?</p>
+						<input type="submit" class="btn btn-danger" value="Confirm">
+						<a href="{% url 'categories:single' slug=object.category.slug %}" class="btn btn-secondary">Cancel</a>
+					</form>
+				</div>
+			</div>
+		</div>
+	{% endblock %}

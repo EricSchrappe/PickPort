@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+	{% load static %}
+	{% block content %}
+		<div class="backgroundImage"></div>
+		<div class="container containerTop">
+			<section class="welcomeSection">
+				<div class="welcomeBox">
+					<h1 class="headlineOne">Simplest way to make choices</h1>
+					<h2 class="headlineTwo">No stress</h2>
+					<h2 class="headlineThree">No hustle</h2>
+					<a class="btn btn-primary btnPosition" href="{% url 'categories:list' %}">Start Now</a>	
+				</div>
+			</section>
+		</div>
+
+
+		
+	{% endblock %}

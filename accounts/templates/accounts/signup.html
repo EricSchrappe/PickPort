@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+	{% load crispy_forms_tags %}
+		{% block content %}
+			<div class="container topSpace bottomSpace">
+				<h3 class="bottomSpace" align="center">Please fill out the form below</h3>
+				<div class="card cardShape cardSize">
+					<div class="card-body">
+						<form method="POST" class='bootstrap4'>
+							{% csrf_token %}
+							{{ form|crispy }}
+							<input type="submit" class="btn btn-primary" value="Register">
+						</form>
+					</div>
+				</div>
+			</div>
+		{% endblock %}

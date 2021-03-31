@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+	{% block content %}
+		<div class="container topSpace">
+			<div class="row justify-content-center">
+				{% block pre_item %}{% endblock %}
+				{% block main_item %}{% endblock %}
+				{% block post_item %}{% endblock %}
+			</div>
+		</div>
+	{% endblock %}

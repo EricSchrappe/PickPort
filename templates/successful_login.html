@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+	{% block content %}
+		<div align="center">
+			<h1>You have logged in successfully.</h1>
+			<h2><a href="{% url 'categories:list' %}">If you want to see all the categories, please click here.</a></h2>	
+		</div>
+	{% endblock %}

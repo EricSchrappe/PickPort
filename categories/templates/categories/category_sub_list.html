@@ -1,0 +1,42 @@
+{% extends 'categories/category_base.html' %}
+	{% block pre_category %}
+		{% if category_sub_list.count != 0 %}
+			<div class="col-md-4">
+				<div class="content">
+					<h3>Hey {{ user.username }}</h3>
+					<h4>Here is a list of all your subscriptions</h4>
+				</div>
+			</div>
+		{% endif %}
+	{% endblock %}
+
+	{% block main_category %}
+		{% if category_sub_list.count != 0 %}
+			<div class="col-md-8">
+				<div class="row row-cols-1 row-cols-md-3">
+					{% if category_sub_list.count == 0 %}
+						<p>The list is empty</p>
+					{% else %}
+					  	{% for category in category_sub_list %}
+						  <div class="col mb-4">
+						    <div class="card cardShape text-dark bg-light mb-3 h-100">
+						      <div class="card-header bg-secondary d-flex justify-content-between">
+						      	<h5 class="card-title"><a class="categoryItems" href="{% url 'categories:single' slug=category.slug %}">{{ category.name }}</a></h5>
+						      	<small><span class="badge badge-warning likesIcon" style="font-size: large;"><span class="material-icons favColorFull sizeIcon">favorite</span> {{ category.likes.count }}</span></small>
+						      </div>
+						      <div class="card-body">
+						        <p class="card-text">{{ category.description }}</p>
+						      </div>
+						    </div>
+						  </div>
+						{% endfor %}
+					{% endif %}
+				</div>
+			</div>
+		{% else %}
+			<div class="col-md-12">
+				<h3 align="center">Hey {{ user.username }}</h3>
+				<h4 align="center">Looks like you haven`t subscribed to any category yet</h4>
+			</div>
+		{% endif %}
+	{% endblock %}

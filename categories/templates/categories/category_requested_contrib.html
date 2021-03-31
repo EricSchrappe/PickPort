@@ -1,0 +1,50 @@
+{% extends 'categories/category_base.html' %}
+	{% block main_category %}
+		{% if requested_contribs|length == 0 %}
+			<div class="col-md-12 align-self-center">
+				<div class="card cardShape cardSize">
+					<div class="card-body">
+						<h3 align="center">Currently no one wants to contribute to your categories</h3>
+					</div>
+				</div>
+			</div>
+		{% else %}
+			<div class="col-md-12 align-self-center">
+				<div class="card cardShape">
+					<div class="card-header bg-secondary text-white">
+						<h4 align="center">Those users would like to contribute to your categories</h4>
+					</div>
+					<div class="card-body">
+						<table class="table table-hover table-bordered mb-0">
+							<thead class="text-white bg-primary">
+								<th>#</th>
+								<th>Username</th>
+								<th>Status</th>
+								<th>Action</th>
+							</thead>
+							<tbody>
+								{% for key, value in requested_contribs.items %}
+									<tr>
+										<td>{{forloop.counter}}</td>
+										<td>{{key.username}}</td>
+										<td>
+											{% if value is False %}
+												Not approved yet
+											{% elif value is True %}
+												Already approved
+											{% endif %}
+										</td>
+										<td>
+											<a href="{% url 'categories:approvecontrib' owner=user.id pk=key.pk %}" class="btn btn-success"><span class="material-icons">thumb_up_alt</span></a>
+											<a href="{% url 'categories:removecontrib' owner=user.id pk=key.pk %}" class="btn btn-danger"><span class="material-icons">thumb_down_alt</span></a>
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		{% endif %}	
+		
+	{% endblock %}

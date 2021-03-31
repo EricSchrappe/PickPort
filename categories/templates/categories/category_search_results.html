@@ -1,0 +1,28 @@
+{% extends "categories/category_base.html" %}
+	{% block pre_category %}
+		<div class="col-md-2">
+			<div class="content">				
+				<h1>Groups</h1>
+				<p>Here are the categories you have searched for:</p>
+			</div>
+			<a href="{% url 'categories:list' %}" class="btn btn-primary"><span class="material-icons" style="font-size: 95%">arrow_back</span> Go back</a>
+		</div>
+	{% endblock %}
+
+	{% block main_category %}
+		<div class="col-md-7">
+			<div class="row row-cols-1 row-cols-md-3">
+			  	{% for re in result %}
+				  <div class="col mb-4">
+				    <div class="card card-1 text-white bg-secondary mb-3 h-100">
+				      <!--<img src="..." class="card-img-top" alt="...">-->
+				      <div class="card-body">
+				        <h5 class="card-title"><a class="categoryItems" href="{% url 'categories:single' slug=re.slug %}">{{ re.name }}</a></h5>
+				        <p class="card-text">{{ re.description }}</p>
+				      </div>
+				    </div>
+				  </div>
+				{% endfor %}
+			</div>
+		</div>
+	{% endblock %}

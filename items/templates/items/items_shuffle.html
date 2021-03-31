@@ -1,0 +1,29 @@
+{% extends "items/items_base.html" %}
+	{% block main_item %}
+		<div class="col-sm-12 align-self-center">
+			{% if item_list.count == 0 %}
+				<div class="card cardShape">
+					<h2>Nothing in the list</h2>
+					<span style='font-size:50px;'>&#128546;</span>
+				</div>
+			{% else %}
+				<script>confetti.start()</script>
+				<h2 class="bottomSpace" align="center">Hey you made it! These are your selected items:</h2>
+				<div class="row">
+					{% for item in item_list %}
+						<div class="col-sm-4">
+							<div class="card cardShape mt-3 mb-3">
+								<div class="card-body">
+									<h5 class="card-title" align="center">{{ forloop.counter}}. Pick:</h5>
+									<p class="card-text" align="center">{{ item.name }}</p>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+				<div class="row">
+					<a class="btn btn-secondary backCategory" href="{% url 'categories:single' slug=cat.slug %}">Back to Category</a>
+				</div>
+			{% endif %}
+		</div>
+	{% endblock %}

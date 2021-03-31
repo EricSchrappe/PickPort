@@ -1,0 +1,62 @@
+{% extends 'categories/category_base.html' %}
+	{% block pre_category %}
+	{% if object_list.count == 0 %}
+		<div class="col-md-12">
+			<div class="card cardShape cardWelcome">
+				<div class="content">
+					<h1 class="welcomeBack">Welcome back @{{user.username}}</h1>
+					<h5>It looks like you haven't created a category yet. Just start now</h5>
+				</div>
+
+				{% if user.is_authenticated %}
+					<a href="{% url 'categories:create' %}" class="btn btn-primary btnCreate">Create Category</a>
+					
+				{% endif %}
+			</div>
+		</div>
+	{% else %}
+		<div class="col-md-4">
+			<div class="content">
+				{% if user.is_authenticated %}
+					<h1>Welcome back @{{user.username}}</h1>
+				{% else %}
+					<h1>Groups</h1>
+					<p>Here you will find an overview of the current categories:</p>
+				{% endif %}
+			</div>
+
+			{% if user.is_authenticated %}
+				<a href="{% url 'categories:create' %}" class="btn btn-primary">Create Category</a>
+				
+			{% endif %}
+		</div>
+	{% endif %}
+	{% endblock %}
+
+	{% block main_category %}
+	{% if object_list.count > 0 %}
+		<div class="col-md-8">
+			<div class="row row-cols-1 row-cols-md-3">
+			  	{% for category in object_list %}
+				  <div class="col mb-4">
+				    <div class="card cardShape text-dark bg-light mb-3 h-100">
+				      <div class="card-header bg-secondary d-flex justify-content-between">
+				      	<h5 class="card-title"><a class="categoryItems" href="{% url 'categories:single' slug=category.slug %}">{{ category.name }}</a></h5>
+				      	<small><span class="badge badge-warning likesIcon" style="font-size: large;"><span class="material-icons favColorFull sizeIcon">favorite</span> {{ category.likes.count }}</span></small>
+				      </div>
+				      <div class="card-body">
+				        <p class="card-text">{{ category.description }}</p>
+				      </div>
+				      <div class="card-footer bg-secondary d-flex justify-content-between">
+				        	{% if user.is_authenticated %}
+					        	<a href="{% url 'categories:update' slug=category.slug %}" class="btn btn-warning">Update</a>
+					        	<a href="{% url 'categories:delete' slug=category.slug %}" class="btn btn-danger">Delete</a>
+					        {% endif %}
+				        </div>
+				    </div>
+				  </div>
+				{% endfor %}
+			</div>
+		</div>
+	{% endif %}
+	{% endblock %}

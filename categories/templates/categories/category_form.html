@@ -1,0 +1,19 @@
+{% extends "categories/category_base.html" %}
+	{% load crispy_forms_tags %}
+		{%block main_category %}
+			<div class="container">
+				<h3 class="bottomSpace" align="center">Please enter a name and description of the category you wanna create</h3>
+				<div class="card cardShape cardSize">
+					<div class="card-body">
+						<form class="bootstrap4" method="POST" action="{% url 'categories:create' %}">
+							{% csrf_token %}
+							{{ form|crispy }}
+							<input type="submit" class="btn btn-primary" value="Create">
+							<a href="{% url 'categories:userlist' pk=request.user.id %}" class="btn btn-secondary">Cancel</a>
+						</form>
+
+					</div>
+				</div>
+			</div>
+				
+		{% endblock %}

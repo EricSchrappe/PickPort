@@ -1,0 +1,17 @@
+{% extends 'items/items_base.html' %}
+	{% load crispy_forms_tags %}
+	{% block main_item %}
+		<div class="container">
+			<h3 class="bottomSpace" align="center">Please make your changes here</h3>
+			<div class="card cardShape cardSize">
+				<div class="card-body">
+					<form method="POST">
+						{% csrf_token %}
+						{{ form|crispy }}
+						<input type="submit" class="btn btn-primary" value="Update">
+						<a href="{% url 'categories:single' slug=cat.slug %}" class="btn btn-secondary">Cancel</a>
+					</form>
+				</div>
+			</div>
+		</div>
+	{% endblock %}

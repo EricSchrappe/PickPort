@@ -1,0 +1,70 @@
+{% extends "categories/category_base.html" %}
+	{% block pre_category %}
+		<div class="col-md-2">
+			<div class="content">				
+				<h1>Groups</h1>
+				<p>Here you will find an overview of the current categories:</p>	
+			</div>
+		</div>
+	{% endblock %}
+
+	{% block main_category %}
+		<div class="col-md-7">
+			<div class="row row-cols-1 row-cols-md-3">
+			  	{% for category in object_list %}
+				  <div class="col mb-4">
+				    <div class="card cardShape text-dark bg-light mb-3 h-100">
+				      <div class="card-header bg-secondary d-flex justify-content-between">
+				      	<h5 class="card-title"><a class="categoryItems" href="{% url 'categories:single' slug=category.slug %}">{{ category.name }}</a></h5>
+				      	<small><span class="badge badge-warning likesIcon" style="font-size: large;"><span class="material-icons favColorFull sizeIcon">favorite</span> {{ category.likes.count }}</span></small>
+				      </div>
+				      <div class="card-body">
+				        <p class="card-text">{{ category.description }}</p>
+				      </div>
+				    </div>
+				  </div>
+				{% endfor %}
+			</div>
+		</div>
+	{% endblock %}
+
+	{% block post_category %}
+		<div class="col-md-3">
+			<div class="card cardShape">
+				<header>
+			        <h6 class="mt-4 ml-3">Search for categories</h6>
+			    </header>
+			    <form method="POST" action="{% url 'categories:search' %}">
+			    	{% csrf_token %}
+				  	<div class="input-group mb-3 ml-3 inputShape">
+				  		<input class="form-control" type="text" name="search_name" placeholder="Search" aria-label="Search">
+				  		<div class="input-group-append">
+				  			<button class="btn btn-outline-primary" type="submit"><span class="material-icons" style="font-size: 95%" >search</span></button>
+				  		</div>
+				  	</div>
+				</form>
+			</div>
+			<div class="card cardShape mt-3">
+				<header>
+					<h6 class="mt-4 ml-3">Latest created categories</h6>
+				</header>
+				{% for cat in latest_cat %}
+					<a href="{% url 'categories:single' slug=cat.slug%}" class="btn btn-outline-info buttonSize">{{ cat.name }}</a><br>
+				{% endfor %}
+			</div>
+			<div class="card cardShape mt-3">
+				<header>
+					<h6 class="mt-4 ml-3">Most Likes</h6>
+				</header>
+				
+					{% for cats in most_likes %}
+					<div class="d-flex justify-content-between mt-4 ml-3 mr-3 mb-2">
+						<a class="likeItems" href="{% url 'categories:single' slug=cats.slug %}">{{cats.name}}</a>
+						<small><span class="badge badge-warning likesIcon" style="font-size: large;"><span class="material-icons favColorFull sizeIcon">favorite</span> {{ cats.likes.count }}</span></small>
+					</div>
+					{% endfor %}
+				
+			</div>
+		</div>
+						
+	{% endblock %}

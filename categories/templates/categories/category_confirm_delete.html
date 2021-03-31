@@ -1,0 +1,18 @@
+{% extends "categories/category_base.html" %}
+	{% block main_category %}
+		
+			<div class="col-sm-12 align-self-center" align="center">
+				<div class="card cardShape cardSize">
+					<div class="card-body">
+						<form method="POST">
+							{% csrf_token %}
+								<h5 class="card-text">If you confirm the delete, the category will be gone. Do you want to continue?</h5>
+								<input type="submit" class="btn btn-danger" value="Confirm">
+								<a href="{% url 'categories:userlist' pk=request.user.id %}" class="btn btn-secondary">Cancel</a>
+						</form>
+					</div>
+				</div>
+			</div>
+			
+		
+	{% endblock %}
