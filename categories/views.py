@@ -258,6 +258,8 @@ class RemoveContribView(LoginRequiredMixin, generic.RedirectView):
 		return super().get(request, *args, **kwargs)
 
 
+class TestView(generic.ListView):
+	model= CategoryLike
 
 
 
